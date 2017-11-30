@@ -1,6 +1,7 @@
+import random # This should be on line #1
 # print("Hello World")
 #
-# # Azrael
+# Azrael
 #
 #
 # print(3+5)
@@ -29,56 +30,25 @@
 # age = input("how old are you?")
 # print(" %s...........Wow that's really old." % age)
 
-#Functions
+# Functions
+# Loops
+#
+#
+# for num in range(1000000):
+#    print(num + 1)
+#
+# DO NOT RUN!!!
+# a = 1
+# while True:
+#    print(a)
+#
+#
+# a = 1
+# while a < 10:
+#     print(a)
+#     a += 1
+#
+#
+# Random Numbers
 
-
-def print_hw():
-    print("Hello World")
-
-
-print_hw()
-print_hw()
-print_hw()
-
-
-def say_hi(name):   # "(name)" is a Parameter
-    print("Hello %s." % name)
-    print("Enjoy your day.")
-
-
-say_hi("John")
-
-
-def print_age(name, age):
-    print("%s is %d years old." % (name, age))
-    age += 1 # age = age + 1
-    print("Next year, they will be %d" % age)
-
-
-print_age("John", 15)
-
-
-def f(x):
-    return x**3 + 4 * x**2 + 7 * x - 4
-
-
-print(f(3))
-print(f(4))
-print(f(5))
-
-
-# If statements
-
-
-def grade_calc(percemtage):
-    if percentage >= 90:
-        return "A"
-    elif percentage >=80 :
-        return "B"
-    elif percentage >= 70:
-        return "C"
-    elif percentage >= 60:
-        return "D"
-    elif percentage <= 50:
-        return "F"
-    
+print(random.randint(0, 100)) 
