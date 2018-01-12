@@ -19,7 +19,7 @@ while money > 0 and broke is False:
         #     question = input("Do you want to stop?")
         #     if question == "yes":
         #         broke = True
-        #         print("You got to round %s" % round)
+        #         print("You got to round %s enjoy you're $%s" % (round,money))
         #     if question == "no":
         #         broke = False
     elif D1 + D2 != 7:
@@ -31,9 +31,12 @@ while money > 0 and broke is False:
         print()
         if money == 0:
             print("You are out of money")
-            print("You got to %s" % round)
+            print("You got to round %s" % round)
+            if tm == 14:
+                print("You shouldn't have bet at all you never gained anything")
+            if tm > 14:
+                print("You should have stopped at round %s when you had $%s" % (tr, tm))
             broke = True
-            print("You should have stopped at round %s when you had $%s" % (tr,tm))
     if money > tm:
         tm = money
         tr = round
