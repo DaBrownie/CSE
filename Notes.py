@@ -103,3 +103,35 @@
 #         return "F"
 #
 # print(random.randint(0, 100))
+
+
+# Lists
+the_count = (1, 2, 3, 4, 5)
+shopping_list = ["Noodles", "Eggrolls", "Milk", "Rice", "Soda", "Chips"]
+
+print(shopping_list[2])
+
+print(len(shopping_list))
+
+# Going through a list
+for item in shopping_list:
+    print(item)
+
+for(num) in the_count:
+    print(num * 2)
+
+len(shopping_list)   # Gives me the length of the list
+range(3)  # Gives you the range of of numbers 0 through 2 but never the actual number
+range(len(shopping_list))  # A list of EVERY index in a list
+
+for num in range(len(shopping_list)):
+    item = shopping_list[num]
+    print("The item at index %d is %s" % (num, item))
+
+
+# Turns things into a list
+str1 = "Hello Class!"
+ListOne = list(str1)
+print(ListOne)
+ListOne[11] = '.'
+print(ListOne)

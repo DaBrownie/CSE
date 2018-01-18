@@ -25,7 +25,6 @@ while money > 0 and broke is False:
     elif D1 + D2 != 7:
         print("You rolled %d" % (D2 + D1))
         money -= 1
-        print("You have lost $1 and have $%s" % money)
         round += 1
         print("You are on round %s" % round)
         print()
