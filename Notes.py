@@ -1,6 +1,6 @@
+import string
 # import random  # This should be on line #1
-# print("Hello World")
-#
+#  print("Hello World")
 # Azrael
 #
 #
@@ -106,32 +106,52 @@
 
 
 # Lists
-the_count = (1, 2, 3, 4, 5)
-shopping_list = ["Noodles", "Eggrolls", "Milk", "Rice", "Soda", "Chips"]
-
-print(shopping_list[2])
-
-print(len(shopping_list))
-
-# Going through a list
-for item in shopping_list:
-    print(item)
-
-for(num) in the_count:
-    print(num * 2)
-
-len(shopping_list)   # Gives me the length of the list
-range(3)  # Gives you the range of of numbers 0 through 2 but never the actual number
-range(len(shopping_list))  # A list of EVERY index in a list
-
-for num in range(len(shopping_list)):
-    item = shopping_list[num]
-    print("The item at index %d is %s" % (num, item))
-
-
-# Turns things into a list
-str1 = "Hello Class!"
-ListOne = list(str1)
-print(ListOne)
-ListOne[11] = '.'
-print(ListOne)
+# the_count = (1, 2, 3, 4, 5)
+# shopping_list = ["Noodles", "Eggrolls", "Milk", "Rice", "Soda", "Chips"]
+#
+# print(shopping_list[2])
+#
+# print(len(shopping_list))
+#
+# # Going through a list
+# for item in shopping_list:
+#     print(item)
+#
+# for(num) in the_count:
+#     print(num * 2)
+#
+# len(shopping_list)   # Gives me the length of the list
+# range(3)  # Gives you the range of of numbers 0 through 2 but never the actual number
+# range(len(shopping_list))  # A list of EVERY index in a list
+#
+# for num in range(len(shopping_list)):
+#     item = shopping_list[num]
+#     print("The item at index %d is %s" % (num, item))
+#
+#
+# # Turns things into a list
+# str1 = "Hello Class!"
+# ListOne = list(str1)
+# print(ListOne)
+# ListOne[11] = '.'
+# print(ListOne)
+# print("".join(ListOne))
+#
+# # Add things to a list
+# shopping_list.append("Cereal")
+# print(shopping_list)
+#
+# # Removing things from a list
+# shopping_list.remove("Soda")
+# print(shopping_list)
+# shopping_list.pop(0)
+# print(shopping_list)
+# print(string.ascii_letters)
+# print(string.ascii_lowercase)
+# print(string.punctuation)
+# print(string.digits)
+#
+# # Dealing with strings
+# strTwo = "ThIs iS a VeRY oDd sEnTenCE"
+# lowercase = strTwo.lower()
+# print(lowercase)
