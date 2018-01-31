@@ -1,4 +1,4 @@
-import string
+*import string
 import random
 
 """
@@ -8,33 +8,28 @@ A general guide for Hangman
 3. Hide the word (use *)
 4. Reveal the letters already guessed
 5. Create the win conditions
+
 """
-
-word_list = ["abcdefghijklmnopqrstuvwxyz", "fish", "are", "is", "type", "of", "lettuce", "and", "cows", "waifu"]
-ran_word = random.choice(word_list)
-A_Z = list(string.ascii_uppercase)
-guess_taken = 10
+word_list = ["chickens", "fish", "are", "is", "type", "of", "lettuce", "and", "cows", "cheese"]
 won = False
-guessed_letters = []
-guess_on = 0
+guesstaken = 10
+phrase = 10
+w1 = (word_list[random.randint(1, 10)])
+w2 = (word_list[random.randint(1, 10)])
+w3 = (word_list[random.randint(1, 10)])
+w4 = (word_list[random.randint(1, 10)])
+`w5 = (word_list[random.randint(1, 10)])
+w6 = (word_list[random.randint(1, 10)])
+w7 = (word_list[random.randint(1, 10)])
+w8 = (word_list[random.randint(1, 10)])
+w9 = (word_list[random.randint(1, 10)])
+w10 = (word_list[random.randint(1, 10)])
+letters = string.ascii_letters
+print(string.ascii_lowercase(letters))
 
-while guess_taken > 0 and won is False:
-    output = []
-    for letter in ran_word:
-        if letter in guessed_letters:
-            output.append(letter)
-        else:
-            output.append("*")
-    print(output)
-    guess_taken -= 1
-    guess = input("Guess a letter")
-    guess_lowered = guess.lower()
-    guessed_letters.append(guess_lowered)
-    if guess_lowered in A_Z:
-        A_Z.remove(guess_lowered)
-        guess_taken += 1
-    elif guessed_letters in A_Z:
-        guess_taken -= 1
-    elif guess_taken == 0:
-        won = True
-        print("You are out of guesses you have lost")
+all_ws = (w1, w2, w3, w4, w5, w6, w7, w8, w9, w10)
+
+while guesstaken > 0 and won is False:
+    if guesstaken > 0:
+        print(all_ws)
+        guesstaken -= 1
