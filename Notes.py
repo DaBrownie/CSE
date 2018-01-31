@@ -105,7 +105,7 @@ import string
 # print(random.randint(0, 100))
 
 
-# Lists
+# # Lists
 # the_count = (1, 2, 3, 4, 5)
 # shopping_list = ["Noodles", "Eggrolls", "Milk", "Rice", "Soda", "Chips"]
 #
@@ -127,16 +127,16 @@ import string
 # for num in range(len(shopping_list)):
 #     item = shopping_list[num]
 #     print("The item at index %d is %s" % (num, item))
-#
-#
-# # Turns things into a list
-# str1 = "Hello Class!"
-# ListOne = list(str1)
-# print(ListOne)
-# ListOne[11] = '.'
-# print(ListOne)
-# print("".join(ListOne))
-#
+
+
+# Turns things into a list
+str1 = "Hello Class!"
+ListOne = list(str1)
+print(ListOne)
+ListOne[1, 2 ,3 ,4 ,5] = '.'
+print(ListOne)
+print("".join(ListOne))
+
 # # Add things to a list
 # shopping_list.append("Cereal")
 # print(shopping_list)
