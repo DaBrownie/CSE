@@ -1,7 +1,7 @@
 import string
-# import random  # This should be on line #1
-#  print("Hello World")
-# Azrael
+import random  # This should be on line #1
+# print("Hello World")
+# # Azrael
 #
 #
 # print(3+5)
@@ -19,22 +19,35 @@ import string
 # car_cylinders = 8
 # car_mpg = 9000.1
 #
-# Inline printing
+# #  Inline printing
 # print("I have car called the %s" % car_name)
 # print("I have a car called the %s. It's a %s." % (car_name, car_type))
-# Asking for input
+# #  Asking for input
 # name = input("what is you name? ")  # In python 3, its just called input()
 # print("Hello %s." % name)
 #
 # age = input("how old are you?")
 # print(" %s...Wow that's really old." % age)
 #
-# Functions
+# #  Functions
 #
+# print(3+5)
+# print(5-3)
+# print(3*5)
+# print(6/2)
+# print(3**2)
 #
 # def print_hw():
 #     print("Hello World")
 #
+# print()  #  This makes a a new line. In python 3.6, it looks like: print()
+# print("See if you can figure this out")
+# print(5%3)
+#
+# car_name = "Wiebe Mobile"
+# car_type = "Lamborghini Sesta Elemento"
+# car_cylinders = 8
+# car_mpg = 9000.1
 #
 # print_hw()
 # print_hw()
@@ -66,17 +79,17 @@ import string
 # print(f(4))
 # print(f(5))
 #
-
-# If statements
-
-
-# Loops
+#
+# #  If statements
+#
+#
+# #  Loops
 #
 #
 # for num in range(1000000):
 #    print(num + 1)
 #
-# DO NOT RUN!!!
+# #  DO NOT RUN!!!
 # a = 1
 # while True:
 #    print(a)
@@ -88,7 +101,7 @@ import string
 #     a += 1
 #
 #
-# Random Numbers
+# #  Random Numbers
 #
 # def grade_calc(percentage):
 #     if percentage >= 90:
@@ -103,9 +116,9 @@ import string
 #         return "F"
 #
 # print(random.randint(0, 100))
-
-
-# Lists
+#
+#
+# #  Lists
 # the_count = (1, 2, 3, 4, 5)
 # shopping_list = ["Noodles", "Eggrolls", "Milk", "Rice", "Soda", "Chips"]
 #
@@ -155,3 +168,40 @@ import string
 # strTwo = "ThIs iS a VeRY oDd sEnTenCE"
 # lowercase = strTwo.lower()
 # print(lowercase)
+
+
+# Dictionaries - Made up of Key: Value pairs
+dictionary = {'name': 'lance', 'age': 23, 'height': 5 * 12 + 2}
+
+# Accessing dictionaries
+print(dictionary['name'])
+print(dictionary['age'])
+print(dictionary['height'])
+
+large_dictionary = {
+    'CA': 'California',
+    'FL': 'Florida',
+    'OH': 'Ohio',
+}
+
+print(large_dictionary['FL'])
+
+larger_dictionary = {
+    'CA': [
+        'Fresno',
+        'Sacramento',
+        'Los Angeles'
+    ],
+    'FL': [
+        "Tampa",
+        "Orlando",
+        "Miami"
+    ],
+    'OH': [
+        "Cleavland",
+        "Cincinnati"
+    ],
+}
+print(larger_dictionary['FL'])
+print(larger_dictionary['FL'][2])
+print(larger_dictionary['OH'][1])
