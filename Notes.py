@@ -178,6 +178,9 @@ print(dictionary['name'])
 print(dictionary['age'])
 print(dictionary['height'])
 
+# Adding to a dictionary
+dictionary["weight"] = 280
+
 large_dictionary = {
     'CA': 'California',
     'FL': 'Florida',
@@ -205,3 +208,45 @@ larger_dictionary = {
 print(larger_dictionary['FL'])
 print(larger_dictionary['FL'][2])
 print(larger_dictionary['OH'][1])
+
+largest_dictionary = {
+    'CA': {
+        'NAME': 'California',
+        'POPULATION': 39250000,
+        'BORDER ST': [
+            'Oregon',
+            'Nevada',
+            'Arizona'
+        ]
+    },
+    'AZ': {
+        'NAME': 'Arizona',
+        'POPULATION': 6931000,
+        'BORDER ST': [
+            'California',
+            'Utah',
+            'Nevada',
+            'New Mexico'
+        ]
+    },
+    'NY': {
+        'NAME': "New York",
+        'POPULATION': 19750000,
+        'BORDER ST': [
+            'Vermont',
+            'Massachusetts',
+            'Connecticut',
+            'Pennsylvania',
+            'New Jersey'
+        ]
+    }
+}
+
+
+print(largest_dictionary['NY']['POPULATION'])
+print(largest_dictionary['NY']['NAME'])
+
+current_node = largest_dictionary['CA']
+print(current_node)
+print(current_node['NAME'])
+print(current_node['POPULATION'])
