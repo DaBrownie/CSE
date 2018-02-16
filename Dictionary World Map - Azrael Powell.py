@@ -22,3 +22,6 @@ world_map = {
         }
     }
 }
+
+current_node = world_map['WESTHOUSE']
+pr
