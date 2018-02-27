@@ -32,10 +32,14 @@ print(first_pair.clean)
 
 
 class Car(object):
-    def __init__(self, type, color):
+    def __init__(self, name, type, color, horsepower):
         self.type = type
         self.color = color
+        self.name = name
+        self.horsepower = horsepower
         self.wash = True
+        self.passengers = 0
+        self.running = False
 
     def wash(self):
         self.wash = True
@@ -53,4 +57,25 @@ class Car(object):
         else:
             self.running = True
             print("You start the car")
-car1 = Car("Pagani Zanda R", "Red")
+
+    def turn_off(self):
+        if self.running:
+            self.running = False
+            print("You turn the car off")
+        else:
+            print("Noting happens")
+
+    def go_for_drive(self, passengers):
+        print("%d passengers get in" % passengers)
+        self.passengers = passengers
+        self.turn_on()
+        self.drive_foward()
+        self.drive_foward()
+        self.drive_foward()
+        self.turn_off()
+        print("%d passengers get out" % passengers)
+        self.passengers = 0
+
+
+my_car = Car("Pagani Zonda", "R", "Red", 9000.01)
+my_car.go_for_drive(4)
