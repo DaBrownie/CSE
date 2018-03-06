@@ -37,7 +37,7 @@ game_map = {
         }
     },
     'TUNNEL': {
-        'NAME': "Dark Tunnel",
+        'NAME': "A Dark Tunnel",
         'DESC': "A Dark tunnel, you can't see anything without a source of light",
         'PATHS': {
             'E': 'GLASS',
