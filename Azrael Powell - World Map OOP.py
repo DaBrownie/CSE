@@ -72,7 +72,8 @@ current_node = CATHEDRAL
 short_directions = ['n', 's', 'e', 'w', 'se']
 directions = ['north', 'south', 'east', 'west', 'southeast']
 inventory = []
-
+target = ()
+prob = ['Goblin', 'Thief', 'Barbarian', 'Wizard', 'Dragon']
 
 
 while True:
