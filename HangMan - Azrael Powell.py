@@ -16,7 +16,7 @@ A_Z = list(string.ascii_uppercase)
 guess_taken = 10
 won = False
 guessed_letters = []
-guess_on = 0
+guess_on = 00.
 
 while guess_taken > 0 and won is False:
     output = []
@@ -38,3 +38,4 @@ while guess_taken > 0 and won is False:
     elif guess_taken == 0:
         won = True
         print("You are out of guesses you have lost")
+
