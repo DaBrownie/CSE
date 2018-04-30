@@ -49,8 +49,8 @@
       <file leaf-file-name="Azrael Powell -CYOA.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Azrael Powell -CYOA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="303" column="42" lean-forward="false" selection-start-line="303" selection-start-column="42" selection-end-line="303" selection-end-column="42" />
+            <state relative-caret-position="136">
+              <caret line="60" column="12" lean-forward="true" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -189,7 +189,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -202,6 +201,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -710,8 +710,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Azrael Powell -CYOA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="303" column="42" lean-forward="false" selection-start-line="303" selection-start-column="42" selection-end-line="303" selection-end-column="42" />
+        <state relative-caret-position="136">
+          <caret line="60" column="12" lean-forward="true" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
           <folding />
         </state>
       </provider>

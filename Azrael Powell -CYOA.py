@@ -6,6 +6,11 @@ def print_inventory():
         print(item.name)
 
 
+def print_npcname():
+    for item in current_node.characters:
+        print(item.name)
+
+
 class Room(object):
     def __init__(self, name, north, south, east, west, southeast, desc, items, characters, enemy):
         self.name = name
@@ -48,6 +53,12 @@ class Character(Stats):
         super(Character, self).__init__(attack, defense, dexterity, speed, range_, luck, intellect)
         self.HP = HP
         self.name = name
+
+    def attack(self, target):
+        pass
+
+    def take_damage(self, dmg):
+        pass
 
 class Skill(object):
     def __init__(self, name, effects, dmgc, crit):
@@ -110,6 +121,7 @@ WOOD_STAFF = Weapon("Wood Sword", "A old wooden staff that might fall apart if y
                     '3', '0', '30')
 
 #  attack, defense, dexterity, speed, range_, luck, intellect, HP
+player = Character(1, 1, 1, 1, 1, 1, 1, 100, "")
 chris = Character(1, 1, 1, 1, 1, 1, 1, 100, 'Chris the FEH expert')
 
 # Initialize Rooms
@@ -298,9 +310,8 @@ while True:
         print('Maybe later')
     if command == '':
         print('Nothing?\n Less work for me')
+    chris.defense -= current_stats.attack
     if command in ['attack', 'hit', 'fight', 'kill']:
         fighter = input("what\n>_")
-        if fighter in current_node.characters:
-            current_node.characters.remove()
-            current_node.enemy.append()
-
+        if fighter is True:
+            print("cannot do that 'YET'")
