@@ -6,13 +6,19 @@ def print_inventory():
         print(item.name)
 
 
+def print_items():
+    print("The item in the room are:")
+    for item in current_node.items:
+        print(item.name)
+
+
 def print_npcname():
     for item in current_node.characters:
         print(item.name)
 
 
 class Room(object):
-    def __init__(self, name, north, south, east, west, southeast, desc, items, characters, enemy):
+    def __init__(self, name, north, south, east, west, southeast, desc, items, characters):
         self.name = name
         self.north = north
         self.south = south
@@ -22,7 +28,6 @@ class Room(object):
         self.desc = desc
         self.items = items
         self.characters = characters
-        self.enemy = enemy
 
     def move(self, direction):
         global current_node
@@ -54,18 +59,38 @@ class Character(Stats):
         self.HP = HP
         self.name = name
 
-    def attack(self, target):
-        pass
 
-    def take_damage(self, dmg):
-        pass
+    def attack(self, target):
+        print('You attack %s' % target.name)
+        dmgd = player.attack - target.defense
+        target.HP = dmgd - target.HP
+        print('you did %s\n %s has %s HP left' % (dmgd, target.name, target.HP))
+
+
+    def take_damage(self, target):
+        print('You take %s attacks you' % target.name)
+        dmgd = target.attack - player.defense
+        player.HP = dmgd - player.HP
+        print('You take %s damage')
+
+
+    def die(self, target):
+        if player.HP == 0:
+            print('you lose\nbetter luck next time')
+            quit(0)
+        if target.HP == 0:
+            print('%s dies\nnice!' % target.name)
+
+
 
 class Skill(object):
-    def __init__(self, name, effects, dmgc, crit):
+    def __init__(self, name, effects, dmgc, crit, manause):
         self.name = name
         self.effects = effects
         self.dmgc = dmgc
         self.crit = crit
+        self.manause = manause
+
 
 class Weapon(Item):
     def __init__(self, name, desc, type_, rarity, dmg, weight, range, uses):
@@ -122,7 +147,7 @@ WOOD_STAFF = Weapon("Wood Sword", "A old wooden staff that might fall apart if y
 
 #  attack, defense, dexterity, speed, range_, luck, intellect, HP
 player = Character(1, 1, 1, 1, 1, 1, 1, 100, "")
-chris = Character(1, 1, 1, 1, 1, 1, 1, 100, 'Chris the FEH expert')
+chris = Character(1, 1, 1, 1, 1, 1, 1, 100, 'Chris')
 
 # Initialize Rooms
 TIMEANDSPACE = Room("Time and Space", None, None, None, None, None, "You don't know where you are, who you are what you"
@@ -130,67 +155,67 @@ TIMEANDSPACE = Room("Time and Space", None, None, None, None, None, "You don't k
                                                                     "or why you are here, but you see A sword, a bow,"
                     "\n a spear and a staff, you reach out to chose one what do you pick", [WOOD_SWORD, WOOD_BOW,
                                                                                             WOOD_SPEAR, WOOD_STAFF],
-                                                                                           [], [])
+                    ())
 CATHEDRAL = Room("The Cathedral", 'ARMORY', 'GRAVEYARD', 'FIRING', 'LIBRARY', None,
                  "You find yourself in a cathedral with broken glass everywhere and worn out furniture. on the other "
-                 "side of the \n middle of the Cathedral %s is approaching you without Leif" % chris.name, [],
-                 [chris], [])
+                 "side of the \n middle of the Cathedral %s is approaching you with a 5%% summon chance on (WT) banner "
+                 "but no Leif" % chris.name, [], chris)
 ARMORY = Room("The Armory", 'HALL', 'CATHEDRAL', 'MAINTROOM', 'FOREST', None, "There is a man guarding a giant box, "
-                                                              "and you feel a strong presence from the box", [], [], [])
+                                                              "and you feel a strong presence from the box", [], ())
 HALL = Room("The Long Hallway", 'REPAIR', 'ARMORY', 'FOOD', None, None, "a long hallway filled with old paintings and "
-                                                                        "inscribing on the wall", [], [], [])
+                                                                        "inscribing on the wall", [], ())
 REPAIR = Room("The Repair Center", None, 'HALL', 'TUNNEL', None, None, "There is a grinder wheel and cleaning cloths"
-                                                                       " neatly laid outs", [], [], [])
+                                                                       " neatly laid outs", [], ())
 TUNNEL = Room("A Dark Tunnel", None, None, 'GLASS', 'REPAIR', None, "A Dark tunnel, you can't see anything without a "
-                                                                    "source of light", [], [], [])
+                                                                    "source of light", [], ())
 GLASS = Room("Glass Statue", None, None, None, 'TUNNEL', None, "In the middle of the room there is a glass statue that "
                                                "looks like the goddess Ishtar, at her feet \n there is a: Long "
                                                "stick, wooden sword, plastic ball, tattered book, and old "
-                                               "bow and arrows", [], [], [])
+                                               "bow and arrows", [], ())
 FOOD = Room("Rations Center", None, None, None, 'HALL', None, "a dusty place with dusty cabinets and old kitchenware",
-            [], [], [])
+            [], ())
 MAINTROOM = Room("Maintenance Room", None, None, 'TELEPOOPER', 'ARMORY', None,
                  "A room with cleaning-ware and in the middle "
                  "a container holding a chain of keys that "
                  "requires a code \n to open. The code is a 6 "
                  "2-digit code (in total 12 digits) is equal "
                  "to west in degrees, \n and has a pattern in "
-                 "prime numbers.", [], [], [])
+                 "prime numbers.", [], ())
 TELEPORTER = Room("Teleporter Room", None, None, None, 'MAINTROOM', None,
                                                          "a room with Mario tubes everywhere (not the "
                                                          "teleporter you thought?). Some of the tubes seem to \n be"
-                                                         " broken and rusted", [], [], [])
+                                                         " broken and rusted", [], ())
 FOREST = Room("Burnt Forest", 'OLWAF', None, 'ARMORY', None, None, "A forest with burnt down trees, skeletons, "
-                                                                   "and bodies everywhere", [], [], [])
+                                                                   "and bodies everywhere", [], ())
 VILLAGE = Room("The Peaceful Village", None, 'OLWAF', None, None, None, "a village with people everywhere...It is quite"
                " a "
                "happy place despite the surrounding war field...\n"
                " The are shops by the factions of the: Blacksmiths,"
-               " Alchemists, Clothiers, and Librarians", [], [], [])
+               " Alchemists, Clothiers, and Librarians", [], ())
 OLWAF = Room("The Old War Field", 'VILLAGE', 'FOREST', None, None, None, "a war field with cannons, corpses, and "
                                                                          "weapons laid everywhere...In the distance "
                                                                          "you see what looks \n  like a village.", [],
-             [], [])
+             ())
 GRAVEYARD = Room("GraveYard", 'CATHEDRAL', None, None, None, None, "a graveyard...with graves...and dead beings of "
                                                                    "multiple races: Elves, dwarfs, humans, demons, "
                                                                    "\n fairies, and sub-terrainians. GraveYards are "
                                                                    "a good research place for necromancers, stay "
-                                                                   "aware \n of your surroundings ", [], [], [])
+                                                                   "aware \n of your surroundings ", [], ())
 LIBRARY = Room("The Library", None, None, 'CATHEDRAL', None, 'NLR', "a library with no books. You should explore it",
-               [], [], [])
+               [], ())
 MAGICIANT = Room("Magician's Test", 'MAGICIANJ', 'LIBRARY', None, None, None, "You are teleported to a room with a man"
                                                                               " in a great robe with a staff and orb "
                                                                               "in his hands. He \n looks at you "
-                                                                              "gesturing you to talk.", [], [], [])
+                                                                              "gesturing you to talk.", [], ())
 MAGICIANJ = Room("Magician's Judgement", 'LIBRARY', None, None, None, None, "He brings you a corner of the room and "
                                                                             "gives you a knife to cut your finger with",
-                 [], [], [])
+                 [], ())
 NLR = Room("No Life's Room", None, None, None, None, 'LIBRARY',
            "You find a room with that's dark but you can still see things pretty clearly and  a human from "
            "\n another  world with a object that looks like a book but sideways and there's a clicking sound "
            "\n every time he interacts with it, it also has pictures in light emitting from the top of the device."
            "\n The person's constantly yelling at the device about the pay-to-win and skilless-spammers, whatever"
-           "\n those are.", [], [], [])
+           "\n those are.", [], ())
 
 current_node = TIMEANDSPACE
 short_directions = ['n', 's', 'e', 'w', 'se']
@@ -226,13 +251,13 @@ view_a_items = [current_stats, current_equip]
 max_exp = 100
 CExp = 0
 inventory = [map1, WOOD_SWORD]
-turn = 0
-
+turn = False
 
 while True:
     if turn == 0:
         print(current_node.name)
         print(current_node.desc)
+        print_items()
     command = input('>_').lower()
     if command == 'i ate the cheese in the fridgerator last night':
         print('You should die')
@@ -302,16 +327,17 @@ while True:
             print('That is not here')
     if command in ['i', 'inv', 'inventory']:
         print_inventory()
-    if command in ['des', 'description', 'desc']:
+    if command in ['d', 'des', 'description', 'desc']:
         print(current_node.desc)
     if command in ['jump', 'fly', 'float', 'soar']:
         print('Congratulations do you feel accomplished?')
     if command in ['suicide', 'die']:
         print('Maybe later')
     if command == '':
-        print('Nothing?\n Less work for me')
-    chris.defense -= current_stats.attack
+        print('Nothing?\nLess work for me')
     if command in ['attack', 'hit', 'fight', 'kill']:
-        fighter = input("what\n>_")
-        if fighter is True:
-            print("cannot do that 'YET'")
+        player.attack(current_node.characters)
+    if command in ['objects', 'object', 'items', 'stuff', 'things']:
+        print_items()
+    if command in ['equip', 'eq', 'put on']:
+        equippedI = input('What?\n>_')
