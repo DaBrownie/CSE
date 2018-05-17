@@ -15,6 +15,29 @@ def print_items():
             print("There are no items here")
 
 
+def print_wequiped():
+    for item in player_stats.eweapon:
+        print(item.name)
+
+
+def print_aequiped():
+    for item in player_stats.earmor:
+        print(item.name)
+
+
+def equip_weapon():
+    iequip = input("What\n>_")
+    for item in inventory:
+        if iequip == item.name and item.req == 'wep' and item.classr == player_stats.classx:
+            removed_item = player_stats.eweapon.remove
+            inventory.append(removed_item)
+            inventory.remove(item)
+            player_stats.eweapon.append(item)
+            print("The armor you have equipped is %s" % print_wequiped())
+        else:
+            print("You cannot do this")
+
+
 def print_npcname():
     for item in current_node.characters:
         print(item.name)
@@ -86,21 +109,24 @@ class Skill(object):
 
 
 class Weapon(Item):
-    def __init__(self, name, desc, type_, rarity, dmg, weight, range, uses):
+    def __init__(self, name, desc, type_, rarity, dmg, weight, range, uses, req, classr):
         super(Weapon, self).__init__(name, desc, type_, rarity)
         self.dmg = dmg
         self.range = weight
         self.range = range
         self.uses = uses
+        self.req = req
+        self.classr = classr
 
 
 class Armor(Item):
-    def __init__(self, name, desc, type_, rarity, def_lvl, mres, spd, dur):
+    def __init__(self, name, desc, type_, rarity, defense, speed, intellect, HP, mana):
         super(Armor, self).__init__(name, desc, type_, rarity)
-        self.def_lvl = def_lvl
-        self.mres = mres
-        self.spd = spd
-        self.dur = dur
+        self.defense = defense
+        self.speed = speed
+        self.intellect = intellect
+        self.HP = HP
+        self.mana = mana
 
 
 class Magic(Item):
@@ -130,28 +156,28 @@ class Key(Tool):
 
 
 WOOD_SWORD = Weapon("wood sword", "A old wooden sword that might fall apart if you use it at all", 'K', 'common', '5',
-                    '3', '0', '30')
+                    '3', '0', '30', 'wep', 'K')
 WOOD_BOW = Weapon("wood bow", "A old wooden bow that might fall apart if you use it at all", 'A', 'common', '5',
-                    '3', '0', '30')
-WOOD_SPEAR = Weapon("wood sword", "A old wooden spear that might fall apart if you use it at all", 'L', 'common', '5',
-                    '3', '0', '30')
-WOOD_STAFF = Weapon("wood sword", "A old wooden staff that might fall apart if you use it at all", 'M', 'common', '5',
-                    '3', '0', '30')
+                    '3', '0', '30', 'wep', 'A')
+WOOD_SPEAR = Weapon("wood spear", "A old wooden spear that might fall apart if you use it at all", 'L', 'common', '5',
+                    '3', '0', '30', 'wep', 'L')
+WOOD_STAFF = Weapon("wood staff", "A old wooden staff that might fall apart if you use it at all", 'M', 'common', '5',
+                    '3', '0', '30', 'wep', 'M')
 #  attack, defense, dexterity, speed, range_, luck, intellect, HP, Mana
 #  attack, defense, speed, chance, luck, intellect, HP, mana, name, classx
-swordstats = Character(7, 7, 3, 1, 4, 0, 100, 300, "", 'K', (), ())
+swordstats = Character(7, 7, 3, 1, 4, 0, 100, 300, "", 'K', [WOOD_BOW], [])
 
-bowstats = Character(3, 3, 6, 7, 3, 0, 100, 300, "", 'A', (), ())
+bowstats = Character(3, 3, 6, 7, 3, 0, 100, 300, "", 'A', [], [])
 
-staffstats = Character(5, 5, 8, 5, 6, 11, 100, 300, "", 'M', (), ())
+staffstats = Character(5, 5, 8, 5, 6, 11, 100, 300, "", 'M', [], [])
 
-spearstats = Character(3, 7, 9, 3, 3, 1, 100, 300, "", 'L', (), ())
+spearstats = Character(3, 7, 9, 3, 3, 1, 100, 300, "", 'L', [], [])
 
-player = Character(0, 0, 0, 0, 0, 0, 100, 300, "", None, (), ())
+player = Character(0, 0, 0, 0, 0, 0, 100, 300, "", None, [], [])
 
-chris = Character(1, 1, 1, 1, 1, 1, 100, 300, 'Chris', 'W', (), ())
+chris = Character(6, 6, 6, 6, 6, 6, 100, 300, 'Chris', 'W', [], [])
 
-# Initialize Rooms
+# Initialize Rooms  name, north, south, east, west, southeast, desc, items, characters, visits
 TIMEANDSPACE = Room("Time and Space", None, None, None, None, None, "You don't know where you are, who you are what you"
                                                                     " are "
                                                                     "or why you are here, but you see A sword, a bow,"
@@ -202,7 +228,8 @@ GRAVEYARD = Room("GraveYard", 'CATHEDRAL', None, None, None, None, "a graveyard.
                                                                    "multiple races: Elves, dwarfs, humans, demons, "
                                                                    "\n fairies, and sub-terrainians. GraveYards are "
                                                                    "a good research place for necromancers, stay "
-                                                                   "aware \n of your surroundings ", [], (), 0)
+                                                                   "aware \n of your surroundings ", [WOOD_SWORD, WOOD_BOW,
+                                                                                            WOOD_SPEAR, WOOD_STAFF], (), 0)
 LIBRARY = Room("The Library", None, None, 'CATHEDRAL', None, 'NLR', "a library with no books. You should explore it",
                [], (), 0)
 MAGICIANT = Room("Magician's Test", 'MAGICIANJ', 'LIBRARY', None, None, None, "You are teleported to a room with a man"
@@ -252,6 +279,7 @@ inventory = [map1]
 choice = 0
 TAS = 0
 turn = 0
+inventory = []
 
 while True:
     if TAS == 0:
@@ -323,11 +351,8 @@ while True:
         print_items()
     if command in ['equip', 'eq', 'put on']:
         print_inventory()
-        equippedI = input('What?\n>_')
-        if equippedI in inventory:
-            inventory.remove(equippedI)
-            equiped.append(equippedI)
-            print('%s has been equipped' % equippedI)
+        equip_weapon()
+
 
 
     if command in ['attack', 'hit', 'fight', 'kill']:
@@ -343,23 +368,15 @@ while True:
             print('You do not have that')
     if command == KeyError:
         print('Command not recognized')
+
     if command == 'take':
         take = input('What?\n>_').lower()
-        if take in current_node.items:
-            print("You took the %s" % take)
-            current_node.items.remove(take)
-            inventory.append(take)
-            print_inventory()
-        elif take not in current_node.items:
-            print('What %s?' % take)
-            if take in current_node.items:
+        for item in current_node.items:
+            if take == item.name:
                 print("You took the %s" % take)
-                current_node.items.remove(take)
-                inventory.append(take)
+                current_node.items.remove(item)
+                inventory.append(item)
                 print_inventory()
-            elif take not in current_node.items:
-                print('That is not here')
-
 
     if command in ['jump', 'fly', 'float', 'soar']:
         print('Congratulations do you feel accomplished?')
@@ -382,3 +399,4 @@ while True:
         choice += 1
     if command == 'idspispopd' and choice == 0:
         choice += 1
+
