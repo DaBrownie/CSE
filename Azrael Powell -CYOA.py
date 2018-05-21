@@ -25,6 +25,17 @@ def print_aequiped():
         print(item.name)
 
 
+def attack(target):
+        if fight == target.name:
+            dmg = target.defense - player_attack
+            if dmg <= 0:
+                print('You do no dmg')
+            elif dmg > 0:
+                hp = target.HP - dmg
+                target.HP = hp
+                print("%s has taken %s damage and has %s HP left" % (target.name, dmg, target.HP))
+
+
 def equip_weapon():
     iequip = input("What\n>_")
     for item in inventory:
@@ -138,7 +149,7 @@ class Magic(Item):
 
 
 class Tool(Item):
-    def __init__(self, name, desc, type_, rarity, ):
+    def __init__(self, name, desc, type_, rarity):
         super(Tool, self).__init__(name, desc, type_, rarity)
 
 
@@ -271,6 +282,7 @@ bottom_piece = None
 gloves = None
 shoes = None
 current_equip = (weapon, head_wear, top_piece, bottom_piece, gloves, shoes)
+player_attack = player_stats.attack + player_stats.eweapon.attck
 killed_enemies = []
 max_exp = 100
 CExp = 0
@@ -356,7 +368,9 @@ while True:
 
 
     if command in ['attack', 'hit', 'fight', 'kill']:
-        pass
+        fight = input('What\n>_')
+        attack(fight)
+
 
     if command == 'drop':
         drop1 = input('What?\n>_').lower()
@@ -399,4 +413,3 @@ while True:
         choice += 1
     if command == 'idspispopd' and choice == 0:
         choice += 1
-
