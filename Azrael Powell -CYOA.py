@@ -1,5 +1,5 @@
 import string
-
+import random
 
 def print_inventory():
     for item in inventory:
@@ -7,7 +7,7 @@ def print_inventory():
 
 
 def print_items():
-    print("The item in the room are:")
+    print("The item(s) in the room are:")
     for item in current_node.items:
         print(item.name)
     for item in current_node.items:
@@ -25,15 +25,32 @@ def print_aequiped():
         print(item.name)
 
 
+attack_t = 0
+aps = ['You attack vigirously', 'You throw a deadly blow', 'You give your best shot', 'A do a simple attack']
+
+
 def attack(target):
-        if fight == target.name:
-            dmg = target.defense - player_attack
-            if dmg <= 0:
-                print('You do no dmg')
-            elif dmg > 0:
-                hp = target.HP - dmg
-                target.HP = hp
-                print("%s has taken %s damage and has %s HP left" % (target.name, dmg, target.HP))
+        print(aps[random.randint(0,3)])
+        randset = random.randint(0,6)
+        if randset == 1 or 3 or 5 and target.HP > 0:
+          print('You hit!')
+          target.HP -= 1
+          if target.HP == 0:
+            print('You kill the %s' % target.name)
+            current_node.characters.remove(target)
+            killed_enemies.append(target)
+          yon = input('Do you want to attack again?')
+          if yon == 'yes':
+            attack(target)
+          elif yon == 'no':
+            print('You unengauge combat')
+        if randset == 0 or 2 or 4 and target.HP > 0:
+          print('You miss!')
+          yon = input('Do you want to attack again?')
+          if yon == 'yes':
+            attack(target)
+          elif yon == 'no':
+            print('You unengauge combat')
 
 
 def equip_weapon():
@@ -60,6 +77,11 @@ def print_killede():
         print(item.name)
         if item not in killed_enemies:
             print('Nothing')
+
+
+class Intro(object):
+    def __init__(self, name):
+        self.name = name
 
 
 class Room(object):
@@ -89,19 +111,9 @@ class Item(object):
         self.rarity = rarity
 
 
-class Stats(object):
-    def __init__(self, attack, defense, speed, luck, chance, intellect):
-        self.attack = attack
-        self.defense = defense
-        self.speed = speed
-        self.luck = luck
-        self.chance = chance
-        self.intellect = intellect
-
-
-class Character(Stats):
-    def __init__(self, attack, defense, speed, luck, chance, intellect, HP, mana, name, classx, eweapon, earmor):
-        super(Character, self).__init__(attack, defense, speed, luck, chance, intellect)
+class Character(object):
+    def __init__(self,HP, mana, name, classx, eweapon, earmor):
+        super(Character, self).__init__()
         self.HP = HP
         self.mana = mana
         self.name = name
@@ -165,35 +177,34 @@ class Key(Tool):
         self.open_ = open_
 
 
-
-WOOD_SWORD = Weapon("wood sword", "A old wooden sword that might fall apart if you use it at all", 'K', 'common', '5',
+intro = Intro("Welcome! To the marvelous world of no where, you don't know where you are, and neither do we!"
+              "but fear not, for there is hope, you have been given the weapon of your choice class")
+SWORD = Weapon("The sword of your imagination", "A sword and the only sword", 'K', 'common', '5',
                     '3', '0', '30', 'wep', 'K')
-WOOD_BOW = Weapon("wood bow", "A old wooden bow that might fall apart if you use it at all", 'A', 'common', '5',
-                    '3', '0', '30', 'wep', 'A')
-WOOD_SPEAR = Weapon("wood spear", "A old wooden spear that might fall apart if you use it at all", 'L', 'common', '5',
+BOW = Weapon("The bow of your imagination", "A bow and the only bow", 'A', 'common', '5',
+                    '3', '0', '30', 'wep', 'A' )
+SPEAR = Weapon("The spear of your imagination", "A spear and the only spear", 'L', 'common', '5',
                     '3', '0', '30', 'wep', 'L')
-WOOD_STAFF = Weapon("wood staff", "A old wooden staff that might fall apart if you use it at all", 'M', 'common', '5',
+STAFF = Weapon("The marvelous magic staff of your imagination", "A staff and the only staff", 'M', 'common', '5',
                     '3', '0', '30', 'wep', 'M')
-#  attack, defense, dexterity, speed, range_, luck, intellect, HP, Mana
-#  attack, defense, speed, chance, luck, intellect, HP, mana, name, classx
-swordstats = Character(7, 7, 3, 1, 4, 0, 100, 300, "", 'K', [WOOD_BOW], [])
+#   mana, name, classx
+swordstats = Character(4, 20, "", 'K', None, None)
 
-bowstats = Character(3, 3, 6, 7, 3, 0, 100, 300, "", 'A', [], [])
+bowstats = Character(2, 30, "", 'A', None, None)
 
-staffstats = Character(5, 5, 8, 5, 6, 11, 100, 300, "", 'M', [], [])
+staffstats = Character(2, 40, "", 'M', None, None)
 
-spearstats = Character(3, 7, 9, 3, 3, 1, 100, 300, "", 'L', [], [])
+spearstats = Character(3, 25, "", 'L', None, None)
 
-player = Character(0, 0, 0, 0, 0, 0, 100, 300, "", None, [], [])
+player_stats = Character(0, 0, "", None, None, None)
 
-chris = Character(6, 6, 6, 6, 6, 6, 100, 300, 'Chris', 'W', [], [])
+chris = Character(2, 20, 'Chris', 'W', None, None)
 
 # Initialize Rooms  name, north, south, east, west, southeast, desc, items, characters, visits
 TIMEANDSPACE = Room("Time and Space", None, None, None, None, None, "You don't know where you are, who you are what you"
                                                                     " are "
                                                                     "or why you are here, but you see A sword, a bow,"
-                    "\n a spear and a staff, you reach out to chose one what do you pick", [WOOD_SWORD, WOOD_BOW,
-                                                                                            WOOD_SPEAR, WOOD_STAFF],
+                    "\n a spear and a staff, you reach out to chose one what do you pick?", [SWORD, BOW, SPEAR, STAFF],
                     (), 0)
 CATHEDRAL = Room("The Cathedral", 'ARMORY', 'GRAVEYARD', 'FIRING', 'LIBRARY', None,
                  "You find yourself in a cathedral with broken glass everywhere and worn out furniture. on the other "
@@ -239,8 +250,8 @@ GRAVEYARD = Room("GraveYard", 'CATHEDRAL', None, None, None, None, "a graveyard.
                                                                    "multiple races: Elves, dwarfs, humans, demons, "
                                                                    "\n fairies, and sub-terrainians. GraveYards are "
                                                                    "a good research place for necromancers, stay "
-                                                                   "aware \n of your surroundings ", [WOOD_SWORD, WOOD_BOW,
-                                                                                            WOOD_SPEAR, WOOD_STAFF], (), 0)
+                                                                   "aware \n of your surroundings ", [SWORD, BOW,
+                                                                    SPEAR, STAFF], (), 0)
 LIBRARY = Room("The Library", None, None, 'CATHEDRAL', None, 'NLR', "a library with no books. You should explore it",
                [], (), 0)
 MAGICIANT = Room("Magician's Test", 'MAGICIANJ', 'LIBRARY', None, None, None, "You are teleported to a room with a man"
@@ -261,37 +272,14 @@ current_node = TIMEANDSPACE
 short_directions = ['n', 's', 'e', 'w', 'se']
 directions = ['north', 'south', 'east', 'west', 'southeast']
 A_Z = list(string.ascii_lowercase)
-HP = 100
-map1 = Item("Map", """
-     ____________________________________________________
-     |                                                  |
-     |                                                  |
-     |                                                  |
-     |                                                  |
-     |                                                  |
-     |                                                  |
-     |                                                  |
-     |                                                  |
-     |                                                  |
-     |__________________________________________________|
-""", "item", "common")
-weapon = None
-head_wear = None
-top_piece = None
-bottom_piece = None
-gloves = None
-shoes = None
-current_equip = (weapon, head_wear, top_piece, bottom_piece, gloves, shoes)
-player_attack = player_stats.attack + player_stats.eweapon.attck
 killed_enemies = []
 max_exp = 100
 CExp = 0
 Level = 1
-inventory = [map1]
+inventory = [intro]
 choice = 0
 TAS = 0
 turn = 0
-inventory = []
 
 while True:
     if TAS == 0:
@@ -317,24 +305,26 @@ while True:
     if current_node == TIMEANDSPACE:
         if 'sword' in command:
             player_stats = swordstats
-            current_node.items.remove(WOOD_SWORD)
-            inventory.append(WOOD_SWORD)
-            current_node = CATHEDRAL
+            current_node.items.remove(SWORD)
+            inventory.append(SWORD)
+            print("You have recieved %s" % SWORD.name)
         if 'bow' in command:
             player_stats = bowstats
-            current_node.items.remove(WOOD_BOW)
-            inventory.append(WOOD_BOW)
-            current_node = CATHEDRAL
+            current_node.items.remove(BOW)
+            inventory.append(BOW)
+            print('You have revieved %s' % BOW.name)
         if 'spear' in command:
             player_stats = spearstats
-            current_node.items.remove(WOOD_SPEAR)
-            inventory.append(WOOD_SPEAR)
-            current_node = CATHEDRAL
+            current_node.items.remove(SPEAR)
+            inventory.append(SPEAR)
+            print('You have recieved %s' % SPEAR.name)
         if 'staff' in command:
             player_stats = staffstats
-            current_node.items.remove(WOOD_STAFF)
-            inventory.append(WOOD_STAFF)
-            current_node = CATHEDRAL
+            current_node.items.remove(STAFF)
+            inventory.append(STAFF)
+            print('You have recieved %s' % STAFF.name)
+        print("You have recieved an intro")
+        current_node = CATHEDRAL
 
 
 
@@ -349,7 +339,8 @@ while True:
             turn = 0
         except KeyError:
             print('You cannot go this way')
-
+    if command == 'read' and command in inventory:
+      print(command.name)
     equiped = None
     if command == 'stats':
         print()
@@ -357,7 +348,7 @@ while True:
         print_inventory()
     if command in ['killed enemies', 'player kills', 'enemies killed', 'ke', 'kills']:
         print_killede()
-    if command in ['d', 'des', 'description', 'desc']:
+    if command in ['d', 'des', 'description', 'desc', 'look', 'see']:
         print(current_node.desc)
     if command in ['objects', 'object', 'items', 'stuff', 'things']:
         print_items()
@@ -366,10 +357,10 @@ while True:
         equip_weapon()
 
 
-
     if command in ['attack', 'hit', 'fight', 'kill']:
-        fight = input('What\n>_')
-        attack(fight)
+        target = input('What\n>_')
+        if target == current_node.characters
+          attack(target)
 
 
     if command == 'drop':
